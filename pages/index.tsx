@@ -1,12 +1,12 @@
-import { Navbar } from "@/components";
-import { Inter } from "next/font/google";
-
-const inter = Inter({ subsets: ["latin"] });
+import { Navbar, Searchbar } from "@/components";
+import { GeneralLayout } from "@/layouts/general-layout";
 
 export default function Home() {
   return (
-    <main>
-      <Navbar />
-    </main>
+    <GeneralLayout>
+      <div className="container">
+        <Searchbar/>
+      </div>
+    </GeneralLayout>
   );
 }
