@@ -1,14 +1,18 @@
 import { LocationCard, Searchbar } from "@/components";
-import { PLACES } from "@/data/places";
 import { GeneralLayout } from "@/layouts/general-layout";
+import { usePlacesProvider } from "@/providers/db-provider";
 
 export default function Home() {
+  const { places } = usePlacesProvider();
+
   return (
     <GeneralLayout>
       <div className="container">
-        <Searchbar/>
+        <Searchbar />
         <div className="flex flex-col items-stretch gap-4">
-          {PLACES.map((item, index) => <LocationCard data={item} key={`item-${index}`}/>)}
+          {places.map((item, index) => (
+            <LocationCard data={item} key={`item-${index}`} />
+          ))}
         </div>
       </div>
     </GeneralLayout>

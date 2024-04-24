@@ -1,4 +1,4 @@
-export const PLACES = [
+export const PLACES_DB = [
   {
     name: "efficitur",
     description:

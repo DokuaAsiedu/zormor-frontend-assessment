@@ -1,10 +1,10 @@
 import { Navbar } from "@/components";
 
-export function GeneralLayout({children}) {
+export function GeneralLayout({ children }) {
   return (
     <div>
-      <Navbar/>
+      <Navbar />
       {children}
     </div>
-  )
+  );
 }
