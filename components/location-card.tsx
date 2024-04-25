@@ -1,6 +1,6 @@
-export function LocationCard({ data }) {
+export function LocationCard({ data, handleClick }) {
   return (
-    <div className="bg-gray-50 rounded-lg p-2">
+    <div className="bg-gray-50 rounded-lg p-2" onClick={handleClick}>
       <p>
         <span className="capitalize">{data.name}</span>,{" "}
         <span>{data.location}</span>
