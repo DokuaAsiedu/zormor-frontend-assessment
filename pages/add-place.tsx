@@ -15,19 +15,19 @@ export default function AddPlace() {
   const { places, updatePlaces } = usePlacesProvider();
   const [formData, setFormData] = useState(formStructure);
 
-  const handleName = (e) => {
+  const handleName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData((prev) => ({ ...prev, name: e.target.value }));
   };
 
-  const handleDescription = (e) => {
+  const handleDescription = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData((prev) => ({ ...prev, description: e.target.value }));
   };
 
-  const handleLocation = (e) => {
+  const handleLocation = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData((prev) => ({ ...prev, location: e.target.value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     // console.log(formData);
 
