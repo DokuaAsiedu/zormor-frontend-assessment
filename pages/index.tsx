@@ -2,6 +2,7 @@ import { LocationCard, Searchbar } from "@/components";
 import { GeneralLayout } from "@/layouts/general-layout";
 import { usePlacesProvider } from "@/providers/db-provider";
 import { useRouter } from "next/router";
+import React from "react";
 
 export default function Home() {
   const { places } = usePlacesProvider();

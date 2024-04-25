@@ -4,16 +4,10 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { usePlacesProvider } from "@/providers/db-provider";
 
-const formStructure = {
-  name: "",
-  description: "",
-  location: "",
-};
-
 export default function AddPlace() {
   const router = useRouter();
   const { places, updatePlaces } = usePlacesProvider();
-  const [formData, setFormData] = useState(formStructure);
+  const [formData, setFormData] = useState<Place>(null as never);
 
   const handleName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData((prev) => ({ ...prev, name: e.target.value }));
@@ -32,8 +26,10 @@ export default function AddPlace() {
     // console.log(formData);
 
     const placesCopy = [...places];
+    const formCopy: Place = {...formData}
+    formCopy.id = places.length + 1
 
-    placesCopy.push(formData);
+    placesCopy.push(formCopy);
     updatePlaces(placesCopy);
 
     localStorage.setItem("places", JSON.stringify(placesCopy));

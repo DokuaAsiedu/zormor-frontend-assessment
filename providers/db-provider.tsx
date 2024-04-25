@@ -1,10 +1,10 @@
 import { PLACES_DB } from "@/data/places";
-import { useEffect, useState, createContext, useContext } from "react";
+import React, { useEffect, useState, createContext, useContext } from "react";
 
-export const PlacesContext = createContext([]);
+export const PlacesContext = createContext<DbContextProps>(null as never);
 
-export function PlacesProvider({ children }) {
-  const [data, setData] = useState([]);
+export function PlacesProvider({ children }: Children) {
+  const [data, setData] = useState<Place[]>([]);
 
   useEffect(() => {
     const storage = localStorage.getItem("places");

@@ -1,7 +1,7 @@
 import { GeneralLayout } from "@/layouts/general-layout";
 import { usePlacesProvider } from "@/providers/db-provider";
 import { useRouter } from "next/router";
-import React, { useEffect, useMemo, useRef } from "react";
+import React, { useMemo } from "react";
 
 export default function Place() {
   const router = useRouter()
@@ -18,8 +18,12 @@ export default function Place() {
   return (
     <GeneralLayout>
       <div className="container">
-        <p>{placeData.name}, {placeData.description}</p>
-        <p>{placeData.description}</p>
+        {placeData &&
+          <>
+            <p>{placeData.name}, {placeData.description}</p>
+            <p>{placeData.description}</p>
+          </>
+        }
       </div>
     </GeneralLayout>
   )

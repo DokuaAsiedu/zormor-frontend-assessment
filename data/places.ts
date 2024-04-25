@@ -1,4 +1,4 @@
-export const PLACES_DB = [
+export const PLACES_DB: Place[] = [
   {
     id: 1,
     name: "efficitur",
