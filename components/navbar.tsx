@@ -5,7 +5,9 @@ import Link from "next/link";
 export function Navbar() {
   return (
     <div className="container flex flex-row items-center justify-start">
-      <Image src={NextLogo} alt="app logo" width={64} />
+      <Link href="/">
+        <Image src={NextLogo} alt="app logo" width={64} />
+      </Link>
 
       <Link
         href="/add-place"
