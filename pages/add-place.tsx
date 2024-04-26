@@ -1,13 +1,19 @@
-import React from "react";
 import { GeneralLayout } from "@/layouts/general-layout";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { usePlacesProvider } from "@/providers/db-provider";
+
+const formStructure = {
+  id: 0,
+  name: "",
+  description: "",
+  location: ""
+}
 
 export default function AddPlace() {
   const router = useRouter();
   const { places, updatePlaces } = usePlacesProvider();
-  const [formData, setFormData] = useState<Place>(null as never);
+  const [formData, setFormData] = useState<Place>(formStructure);
 
   const handleName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData((prev) => ({ ...prev, name: e.target.value }));
@@ -25,6 +31,8 @@ export default function AddPlace() {
     e.preventDefault();
     // console.log(formData);
 
+
+
     const placesCopy = [...places];
     const formCopy: Place = {...formData}
     formCopy.id = places.length + 1
@@ -38,42 +46,48 @@ export default function AddPlace() {
 
   return (
     <GeneralLayout>
-      <form>
-        <div>
-          <label htmlFor="name">Name:</label>
+      <form className="container grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="flex flex-col items-stretch">
+          <label htmlFor="name">Name: </label>
           <input
+            className="p-2 outline-none bg-blue-100 rounded-md"
             id="name"
             type="text"
             name="name"
             value={formData.name}
             onChange={handleName}
+            required={true}
           />
         </div>
 
-        <div>
-          <label htmlFor="description">Description:</label>
+        <div className="flex flex-col items-stretch">
+          <label htmlFor="location">Location: </label>
           <input
-            id="description"
-            type="text"
-            name="description"
-            value={formData.description}
-            onChange={handleDescription}
-          />
-        </div>
-
-        <div>
-          <label htmlFor="location">Location:</label>
-          <input
+            className="p-2 outline-none bg-blue-100 rounded-md"
             id="location"
             type="text"
             name="location"
             value={formData.location}
             onChange={handleLocation}
+            required={true}
+          />
+        </div>
+
+        <div className="sm:col-span-2 flex flex-col items-stretch">
+          <label htmlFor="description">Description: </label>
+          <input
+            className="p-2 outline-none bg-blue-100 rounded-md"
+            id="description"
+            type="text"
+            name="description"
+            value={formData.description}
+            onChange={handleDescription}
+            required={true}
           />
         </div>
 
         <button
-          className="p-2 bg-blue-800 text-white rounded-md"
+          className="sm:col-span-2 p-2 bg-blue-800 text-white rounded-md"
           type="submit"
           onClick={handleSubmit}
         >

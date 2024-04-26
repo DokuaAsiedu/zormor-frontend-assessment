@@ -13,3 +13,8 @@ interface DbContextProps {
   places: Place[];
   updatePlaces: (places: Place[]) => void;
 }
+
+interface SearchContextProps {
+  displaySearch: boolean;
+  setDisplaySearch: (displaySearch: boolean) => void;
+}

@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <GeneralLayout>
       <div className="container">
-        <Searchbar />
+        {/* <Searchbar /> */}
         <div className="flex flex-col items-stretch gap-4">
           {places.map((item, index) => (
             <LocationCard data={item} key={`item-${index}`} handleClick={() => {

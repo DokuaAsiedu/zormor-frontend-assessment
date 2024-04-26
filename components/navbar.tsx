@@ -1,20 +1,23 @@
 import Image from "next/image";
 import NextLogo from "@/public/next.svg";
 import Link from "next/link";
+import { IoSearchOutline } from "react-icons/io5";
 
-export function Navbar() {
+export function Navbar({handleOpen}: {handleOpen: () => void}) {
   return (
-    <div className="container flex flex-row items-center justify-start">
+    <div className="sticky top-0 container py-4 flex flex-row items-center justify-start gap-4 bg-white">
       <Link href="/">
         <Image src={NextLogo} alt="app logo" width={64} />
       </Link>
 
       <Link
         href="/add-place"
-        className="ms-auto p-2 bg-blue-800 text-white rounded-md"
+        className="ms-auto p-2 bg-blue-800 text-xs text-white rounded-md"
       >
         Add New Place
       </Link>
+
+      <IoSearchOutline onClick={handleOpen}/>
     </div>
   );
 }
