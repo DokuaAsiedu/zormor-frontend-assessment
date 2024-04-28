@@ -2,7 +2,7 @@ import { GeneralLayout } from "@/layouts/general-layout";
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { usePlacesProvider } from "@/providers/db-provider";
-import { OpenPeriod } from "@/components";
+import { Error, OpenPeriod } from "@/components";
 
 const formStructure = {
   id: 0,
@@ -19,6 +19,7 @@ export default function AddPlace() {
   const [periods, setPeriods] = useState<Period[]>([
     { days: [], start: "", end: "" },
   ]);
+  const [errors, setErrors] = useState({name: "", location: "", description: "", openPeriods: ""})
 
   const handleName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData((prev) => ({ ...prev, name: e.target.value }));
@@ -32,9 +33,49 @@ export default function AddPlace() {
     setFormData((prev) => ({ ...prev, location: e.target.value }));
   };
 
+  const handleErrors = () => {
+    let anyError = true
+
+    if (!formData.name.trim()) {
+      setErrors(prev => ({...prev, name: "Please enter a valid name"}))
+      anyError = false
+    }
+    if (places.find(item => item.name.toLowerCase() === formData.name.trim().toLowerCase())) {
+      setErrors(prev => ({...prev, name: "Name already exists"}))
+      anyError = false
+    }
+    if (!formData.description.trim()) {
+      setErrors(prev => ({...prev, description: "Please enter a valid description"}))
+      anyError = false
+    }
+    if (!formData.location.trim()) {
+      setErrors(prev => ({...prev, location: "Please enter a valid location"}))
+      anyError = false
+    }
+
+
+    if (periods.some(item => item.days.length === 0)) {
+      setErrors(prev => ({...prev, openPeriods: "Please fill in the days"}))
+      anyError = false
+    }
+    else if (periods.some(item => item.start === "")) {
+      setErrors(prev => ({...prev, openPeriods: "Please add the start hours"}))
+      anyError = false
+    }
+    else if (periods.some(item => item.end === "")) {
+      setErrors(prev => ({...prev, openPeriods: "Please add the end hours"}))
+      anyError = false
+    }
+    return anyError
+  }
+
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     // console.log(formData);
+
+    if (!handleErrors()) {
+      return
+    }
 
     const placesCopy = [...places];
     const fullForm: Place = Object.assign({}, formData, {
@@ -64,6 +105,7 @@ export default function AddPlace() {
             onChange={handleName}
             required={true}
           />
+          <Error message={errors.name}/>
         </div>
 
         <div className="flex flex-col items-stretch">
@@ -77,6 +119,7 @@ export default function AddPlace() {
             onChange={handleLocation}
             required={true}
           />
+          <Error message={errors.location}/>
         </div>
 
         <div className="sm:col-span-2 flex flex-col items-stretch">
@@ -90,6 +133,7 @@ export default function AddPlace() {
             onChange={handleDescription}
             required={true}
           />
+          <Error message={errors.description}/>
         </div>
 
         <div className="sm:col-span-2 flex flex-col items-stretch gap-1">
@@ -98,6 +142,7 @@ export default function AddPlace() {
             periods={periods}
             handlePeriods={setPeriods}
           />
+          <Error message={errors.openPeriods}/>
         </div>
 
         <button
