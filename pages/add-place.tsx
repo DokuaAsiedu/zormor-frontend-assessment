@@ -2,18 +2,23 @@ import { GeneralLayout } from "@/layouts/general-layout";
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { usePlacesProvider } from "@/providers/db-provider";
+import { OpenPeriod } from "@/components";
 
 const formStructure = {
   id: 0,
   name: "",
   description: "",
-  location: ""
+  location: "",
+  openPeriods: [
+    {days: [], start: "", end: ""}
+  ]
 }
 
 export default function AddPlace() {
   const router = useRouter();
   const { places, updatePlaces } = usePlacesProvider();
   const [formData, setFormData] = useState<Place>(formStructure);
+  const [periods, setPeriods] = useState<Period[]>([{days: [], start: "", end: ""}])
 
   const handleName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData((prev) => ({ ...prev, name: e.target.value }));
@@ -31,13 +36,12 @@ export default function AddPlace() {
     e.preventDefault();
     // console.log(formData);
 
-
-
     const placesCopy = [...places];
-    const formCopy: Place = {...formData}
-    formCopy.id = places.length + 1
+    const fullForm: Place = Object.assign({}, formData, {openPeriods: periods})
+    // console.log(fullForm)
+    fullForm.id = places.length + 1
 
-    placesCopy.push(formCopy);
+    placesCopy.push(fullForm);
     updatePlaces(placesCopy);
 
     localStorage.setItem("places", JSON.stringify(placesCopy));
@@ -84,6 +88,11 @@ export default function AddPlace() {
             onChange={handleDescription}
             required={true}
           />
+        </div>
+
+        <div className="sm:col-span-2 flex flex-col items-stretch gap-1">
+          <p>Open Times:</p>
+          <OpenPeriod periods={periods} handlePeriods={setPeriods}/>
         </div>
 
         <button

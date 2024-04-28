@@ -5,3 +5,7 @@
 body {
   @apply text-base min-w-[280px];
 }
+
+/* input[type="time"]::-webkit-datetime-edit {
+  display: none;
+} */
