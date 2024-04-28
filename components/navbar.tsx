@@ -3,11 +3,15 @@ import NextLogo from "@/public/next.svg";
 import Link from "next/link";
 import { IoSearchOutline } from "react-icons/io5";
 
-export function Navbar({handleOpen}: {handleOpen: () => void}) {
+export function Navbar({ handleOpen }: { handleOpen: () => void }) {
   return (
     <div className="sticky top-0 container py-4 flex flex-row items-center justify-start gap-4 bg-white">
       <Link href="/">
-        <Image src={NextLogo} alt="app logo" width={64} />
+        <Image
+          src={NextLogo}
+          alt="app logo"
+          width={64}
+        />
       </Link>
 
       <Link
@@ -17,7 +21,7 @@ export function Navbar({handleOpen}: {handleOpen: () => void}) {
         Add New Place
       </Link>
 
-      <IoSearchOutline onClick={handleOpen}/>
+      <IoSearchOutline onClick={handleOpen} />
     </div>
   );
 }

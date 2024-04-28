@@ -6,7 +6,7 @@ import React from "react";
 
 export default function Home() {
   const { places } = usePlacesProvider();
-  const router = useRouter()
+  const router = useRouter();
 
   return (
     <GeneralLayout>
@@ -14,12 +14,16 @@ export default function Home() {
         {/* <Searchbar /> */}
         <div className="flex flex-col items-stretch gap-4">
           {places.map((item, index) => (
-            <LocationCard data={item} key={`item-${index}`} handleClick={() => {
-              router.push({
-                pathname: "/place",
-                query: {id: item.id}
-              })
-            }} />
+            <LocationCard
+              data={item}
+              key={`item-${index}`}
+              handleClick={() => {
+                router.push({
+                  pathname: "/place",
+                  query: { id: item.id },
+                });
+              }}
+            />
           ))}
         </div>
       </div>

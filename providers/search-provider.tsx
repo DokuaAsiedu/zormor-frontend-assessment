@@ -1,21 +1,22 @@
 import { createContext, useContext, useState } from "react";
 
-export const SearchContext = createContext<SearchContextProps>(null as never)
+export const SearchContext = createContext<SearchContextProps>(null as never);
 
-export function SearchProvider({children}: Children) {
-  const [displaySearch, setDisplaySearch] = useState(false)
+export function SearchProvider({ children }: Children) {
+  const [displaySearch, setDisplaySearch] = useState(false);
 
   return (
-    <SearchContext.Provider 
+    <SearchContext.Provider
       value={{
         displaySearch: displaySearch,
-        setDisplaySearch: setDisplaySearch
-      }}>
+        setDisplaySearch: setDisplaySearch,
+      }}
+    >
       {children}
     </SearchContext.Provider>
-  )
+  );
 }
 
 export function useSearchProvider() {
-  return useContext(SearchContext)
+  return useContext(SearchContext);
 }

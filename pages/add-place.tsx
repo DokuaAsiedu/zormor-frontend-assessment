@@ -9,16 +9,16 @@ const formStructure = {
   name: "",
   description: "",
   location: "",
-  openPeriods: [
-    {days: [], start: "", end: ""}
-  ]
-}
+  openPeriods: [{ days: [], start: "", end: "" }],
+};
 
 export default function AddPlace() {
   const router = useRouter();
   const { places, updatePlaces } = usePlacesProvider();
   const [formData, setFormData] = useState<Place>(formStructure);
-  const [periods, setPeriods] = useState<Period[]>([{days: [], start: "", end: ""}])
+  const [periods, setPeriods] = useState<Period[]>([
+    { days: [], start: "", end: "" },
+  ]);
 
   const handleName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData((prev) => ({ ...prev, name: e.target.value }));
@@ -37,9 +37,11 @@ export default function AddPlace() {
     // console.log(formData);
 
     const placesCopy = [...places];
-    const fullForm: Place = Object.assign({}, formData, {openPeriods: periods})
+    const fullForm: Place = Object.assign({}, formData, {
+      openPeriods: periods,
+    });
     // console.log(fullForm)
-    fullForm.id = places.length + 1
+    fullForm.id = places.length + 1;
 
     placesCopy.push(fullForm);
     updatePlaces(placesCopy);
@@ -92,7 +94,10 @@ export default function AddPlace() {
 
         <div className="sm:col-span-2 flex flex-col items-stretch gap-1">
           <p>Open Times:</p>
-          <OpenPeriod periods={periods} handlePeriods={setPeriods}/>
+          <OpenPeriod
+            periods={periods}
+            handlePeriods={setPeriods}
+          />
         </div>
 
         <button
