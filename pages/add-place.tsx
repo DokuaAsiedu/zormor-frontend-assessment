@@ -55,17 +55,9 @@ export default function AddPlace() {
             imageArr.push(`${result}`)
             setImages(imageArr)
           }
-          
-          // console.log(imageArr)
-          // setBase64
         }
       })
     }
-    // console.log(imageArr)
-    
-    // reader.readAsArrayBuffer
-    // setImages(e.target.files);
-    // console.log(e.target.files)
   }
 
   useEffect(() => {
