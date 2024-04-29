@@ -97,7 +97,7 @@ export default function AddPlace() {
         <div className="flex flex-col items-stretch">
           <label htmlFor="name">Name: </label>
           <input
-            className="p-2 outline-none bg-blue-100 rounded-md"
+            className="p-2 outline-none outline-yellow-500 outline-[1px] rounded-md"
             id="name"
             type="text"
             name="name"
@@ -111,7 +111,7 @@ export default function AddPlace() {
         <div className="flex flex-col items-stretch">
           <label htmlFor="location">Location: </label>
           <input
-            className="p-2 outline-none bg-blue-100 rounded-md"
+            className="p-2 outline-none outline-yellow-500 outline-[1px] rounded-md"
             id="location"
             type="text"
             name="location"
@@ -125,7 +125,7 @@ export default function AddPlace() {
         <div className="sm:col-span-2 flex flex-col items-stretch">
           <label htmlFor="description">Description: </label>
           <input
-            className="p-2 outline-none bg-blue-100 rounded-md"
+            className="p-2 outline-none outline-yellow-500 outline-[1px] rounded-md"
             id="description"
             type="text"
             name="description"
@@ -146,7 +146,7 @@ export default function AddPlace() {
         </div>
 
         <button
-          className="sm:col-span-2 p-2 bg-blue-800 text-white rounded-md"
+          className="sm:col-span-2 p-2 bg-yellow-500 rounded-md"
           type="submit"
           onClick={handleSubmit}
         >

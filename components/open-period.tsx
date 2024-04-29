@@ -87,13 +87,13 @@ export function OpenPeriod({
 
   return (
     <div>
-      <div className="h-fit flex flex-row items-stretch flex-wrap gap-2 text-sm">
+      <div className="flex flex-row items-stretch flex-wrap gap-2 text-sm">
         {DAYS_OF_WEEK.map((item, index) => {
           return (
             <button
               type="button"
               key={`item-${index}`}
-              className={`h-full p-1  grid place-items-center aspect-square capitalize  border-[1px] border-blue-400 rounded-full ${usedDays.includes(item) ? "bg-blue-400 text-white" : "bg-white text-blue-600"}`}
+              className={`h-12 aspect-square grid place-items-center capitalize  border-[1px] border-yellow-500 rounded-full ${usedDays.includes(item) ? "bg-yellow-500" : "bg-white"}`}
               onClick={() => addDay(item)}
             >
               {item}

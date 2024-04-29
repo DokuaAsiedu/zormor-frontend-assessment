@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  @apply text-base min-w-[280px];
+  @apply text-base min-w-[280px] bg-gray-50;
 }
 
 /* input[type="time"]::-webkit-datetime-edit {

@@ -32,12 +32,12 @@ export function Searchbar({ handleClose }: { handleClose: () => void }) {
   return createPortal(
     <div className="fixed top-0 left-0 w-full h-full">
       <div
-        className="absolute top-0 left-0 z-10 w-full h-full bg-gray-300/55"
+        className="absolute top-0 left-0 z-10 w-full h-full bg-gray-500/90"
         onClick={handleClose}
       />
 
       <div className="container">
-        <div className="relative z-20 mt-24 flex flex-row items-stretch bg-blue-100 rounded-md *:min-w-0">
+        <div className="relative z-20 mt-24 flex flex-row items-stretch bg-yellow-50 rounded-md *:min-w-0">
           <input
             className="flex-1 p-2 outline-none bg-transparent"
             type="search"
@@ -46,12 +46,12 @@ export function Searchbar({ handleClose }: { handleClose: () => void }) {
             value={searchTerm}
           />
 
-          <button className="text-white px-4 bg-blue-800 rounded-md text-xs">
+          <button className="px-4 bg-yellow-500 rounded-md">
             Search
           </button>
 
           {searchTerm.length > 0 && (
-            <div className="absolute bottom-0 left-0 translate-y-full h-auto max-h-48 w-full flex flex-col items-stretch bg-white overflow-y-auto rounded-b-md *:border-t-[1px] *:border-t-gray-300">
+            <div className="absolute bottom-0 left-0 translate-y-full h-auto max-h-48 w-full flex flex-col items-stretch bg-yellow-50 overflow-y-auto rounded-md *:border-t-[1px] *:border-t-yellow-300">
               {searchRes.length > 0 ? (
                 searchRes.map((item, index) => {
                   return (
@@ -61,7 +61,7 @@ export function Searchbar({ handleClose }: { handleClose: () => void }) {
                       onClick={() => handleRedirect(item.id)}
                     >
                       <p className="capitalize font-bold">{item.name}</p>
-                      <p className="truncate text-xs">{item.description}</p>
+                      <p className="truncate">{item.description}</p>
                     </div>
                   );
                 })

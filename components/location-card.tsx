@@ -9,7 +9,7 @@ export function LocationCard({
 }) {
   return (
     <div
-      className="flex flex-col items-stretch gap-4 bg-gray-50 rounded-lg p-2"
+      className="p-2 flex flex-col items-stretch gap-4 rounded-lg border-[1px] border-yellow-500"
       onClick={handleClick}
     >
       <div className="grid grid-cols-1 md:grid-cols-2">

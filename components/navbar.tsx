@@ -5,7 +5,7 @@ import { IoSearchOutline } from "react-icons/io5";
 
 export function Navbar({ handleOpen }: { handleOpen: () => void }) {
   return (
-    <div className="sticky top-0 container py-4 flex flex-row items-center justify-start gap-4 bg-white">
+    <div className="sticky top-0 container py-4 flex flex-row items-center justify-start gap-4 bg-gray-50">
       <Link href="/">
         <Image
           src={NextLogo}
@@ -16,7 +16,7 @@ export function Navbar({ handleOpen }: { handleOpen: () => void }) {
 
       <Link
         href="/add-place"
-        className="ms-auto p-2 bg-blue-800 text-xs text-white rounded-md"
+        className="ms-auto p-2 bg-yellow-500 rounded-md"
       >
         Add New Place
       </Link>
