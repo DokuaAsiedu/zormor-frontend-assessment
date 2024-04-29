@@ -17,7 +17,7 @@ export default function AddPlace() {
   const router = useRouter();
   const { places, updatePlaces } = usePlacesProvider();
   const [formData, setFormData] = useState<Place>(formStructure);
-  const [images, setImages] = useState<ArrayBuffer | string | null>([] as never)
+  const [images, setImages] = useState<Image[]>([])
   const [periods, setPeriods] = useState<Period[]>([
     { days: [], start: "", end: "" },
   ]);
@@ -41,7 +41,7 @@ export default function AddPlace() {
     // const image = await getFileFromInput
     // const reader = new FileReader();
 
-    const imageArr: unknown[] = [];
+    const imageArr: Image[] = [];
 
     if (files && files.length > 0) {
       Array.from(files).forEach(item => {
@@ -49,11 +49,15 @@ export default function AddPlace() {
         reader.readAsDataURL(item)
 
         reader.onload = function() {
-          console.log(this.result)
-          imageArr.push(this.result)
+          const result = this.result
+          if (result !== null) {
+            console.log(result)
+            imageArr.push(`${result}`)
+            setImages(imageArr)
+          }
+          
           // console.log(imageArr)
           // setBase64
-          setImages(imageArr)
         }
       })
     }

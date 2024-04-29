@@ -4,8 +4,10 @@ interface Place {
   description: string;
   location: string;
   openPeriods: Period[];
-  images: string[] | ArrayBuffer[];
+  images: Image[];
 }
+
+type Image = string | ArrayBuffer;
 
 type Children = {
   children: React.ReactNode;

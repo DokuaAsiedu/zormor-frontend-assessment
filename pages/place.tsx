@@ -2,11 +2,19 @@ import { GeneralLayout } from "@/layouts/general-layout";
 import { usePlacesProvider } from "@/providers/db-provider";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
+import { createPortal } from "react-dom";
 
 export default function Place() {
+  const [showModal, setShowModal] = useState(false)
+  const [modalSrc, setModalScr] = useState("")
   const router = useRouter();
   const { places } = usePlacesProvider();
+
+  const handleModal = (src: string) => {
+    setShowModal(true)
+    setModalScr(src)
+  }
 
   const placeData = useMemo(() => {
     const { id } = router.query;
@@ -30,7 +38,7 @@ export default function Place() {
               return (
                 <div key={`item-${index}`} className="grid grid-cols-2 font-bold">
                   <p className="capitalize">{item.days.join(', ')}</p>
-                  <p className="justify-self-end self-center">{`${item.start}:${item.end}`}</p>
+                  <p className="justify-self-end self-center">{`${item.start} - ${item.end}`}</p>
                 </div>
               )
             })}</div>
@@ -38,13 +46,21 @@ export default function Place() {
             <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 justify-center">
               {placeData.images.map((item, index) => {
                 return (
-                  <Image key={`item-${index}`} alt="location image" src={`${item}`} width={32} height={32} className="w-full aspect-square"/>
+                  <Image key={`item-${index}`} alt="location image" src={`${item}`} width={32} height={32} className="w-full aspect-square" onClick={() => handleModal(`${item}`)}/>
                 )
               })}
             </div>
           </div>
         )}
       </div>
+
+      {showModal && createPortal(
+        <div className="h-full w-full absolute left-0 top-0 flex flex-col items-center justify-center">
+          <div className="h-full w-full bg-gray-500/90 fixed top-0 left-0 z-10" onClick={() => setShowModal(false)}></div>
+
+          <Image src={modalSrc} alt="image modal" width={100} height={100} className="container relative z-20 w-full"/>
+        </div>,
+        document.body)}
     </GeneralLayout>
   );
 }
