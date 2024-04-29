@@ -40,6 +40,20 @@ export default function AddPlace() {
       setErrors(prev => ({...prev, name: "Please enter a valid name"}))
       anyError = false
     }
+    else {
+      setErrors(prev => ({...prev, name: ""}))
+    }
+
+
+    if (places.find(item => item.name.toLowerCase() === formData.name.trim().toLowerCase())) {
+      setErrors(prev => ({...prev, name: "Name already exists"}))
+      anyError = false
+    }
+    else {
+      setErrors(prev => ({...prev, name: ""}))
+    }
+
+
     if (places.find(item => item.name.toLowerCase() === formData.name.trim().toLowerCase())) {
       setErrors(prev => ({...prev, name: "Name already exists"}))
       anyError = false
@@ -48,9 +62,17 @@ export default function AddPlace() {
       setErrors(prev => ({...prev, description: "Please enter a valid description"}))
       anyError = false
     }
+    else {
+      setErrors(prev => ({...prev, description: ""}))
+    }
+
+
     if (!formData.location.trim()) {
       setErrors(prev => ({...prev, location: "Please enter a valid location"}))
       anyError = false
+    }
+    else {
+      setErrors(prev => ({...prev, location: ""}))
     }
 
 
@@ -66,6 +88,11 @@ export default function AddPlace() {
       setErrors(prev => ({...prev, openPeriods: "Please add the end hours"}))
       anyError = false
     }
+    else {
+      setErrors(prev => ({...prev, openPeriods: ""}))
+    }
+
+
     return anyError
   }
 
