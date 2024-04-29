@@ -4,6 +4,7 @@ interface Place {
   description: string;
   location: string;
   openPeriods: Period[];
+  images: string[] | ArrayBuffer[];
 }
 
 type Children = {

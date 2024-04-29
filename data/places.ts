@@ -12,6 +12,7 @@ export const PLACES_DB: Place[] = [
         end: "14:00",
       },
     ],
+    images: [],
   },
   {
     id: 2,
@@ -26,6 +27,7 @@ export const PLACES_DB: Place[] = [
         end: "14:00",
       },
     ],
+    images: [],
   },
   {
     id: 3,
@@ -40,6 +42,7 @@ export const PLACES_DB: Place[] = [
         end: "14:00",
       },
     ],
+    images: [],
   },
   {
     id: 4,
@@ -54,6 +57,7 @@ export const PLACES_DB: Place[] = [
         end: "14:00",
       },
     ],
+    images: [],
   },
   {
     id: 5,
@@ -68,6 +72,7 @@ export const PLACES_DB: Place[] = [
         end: "14:00",
       },
     ],
+    images: [],
   },
   {
     id: 6,
@@ -82,6 +87,7 @@ export const PLACES_DB: Place[] = [
         end: "14:00",
       },
     ],
+    images: [],
   },
   {
     id: 7,
@@ -96,6 +102,7 @@ export const PLACES_DB: Place[] = [
         end: "14:00",
       },
     ],
+    images: [],
   },
   {
     id: 8,
@@ -110,6 +117,7 @@ export const PLACES_DB: Place[] = [
         end: "14:00",
       },
     ],
+    images: [],
   },
   {
     id: 9,
@@ -124,6 +132,7 @@ export const PLACES_DB: Place[] = [
         end: "14:00",
       },
     ],
+    images: [],
   },
   {
     id: 10,
@@ -138,5 +147,6 @@ export const PLACES_DB: Place[] = [
         end: "14:00",
       },
     ],
+    images: [],
   },
 ];

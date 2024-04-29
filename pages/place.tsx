@@ -1,5 +1,6 @@
 import { GeneralLayout } from "@/layouts/general-layout";
 import { usePlacesProvider } from "@/providers/db-provider";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useMemo } from "react";
 
@@ -34,6 +35,13 @@ export default function Place() {
               )
             })}</div>
             <p>{placeData.description}</p>
+            <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 justify-center">
+              {placeData.images.map((item, index) => {
+                return (
+                  <Image key={`item-${index}`} alt="location image" src={`${item}`} width={32} height={32} className="w-full aspect-square"/>
+                )
+              })}
+            </div>
           </div>
         )}
       </div>

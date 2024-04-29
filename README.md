@@ -26,4 +26,6 @@ You can start editing the page by modifying `pages/index.tsx`. The page auto-upd
 
 ## Implementation
 
-When the project is first run, data from it checks to see if `data/places.ts` is loaded into the memory
+Since this is a purely fronted approach to this project, web storage is being relied upon for the database location. More specifically, indedexedDB is the web storage being used.
+
+When the site first loads, dummy data from the `data/places.ts` file is fed into indexedDB and then loaded into the state object of the `<PlacesProvider>` component in `providers/db-provider.tsx`. The file is used as a context wrapper for the whole app so that the database can be accessible from anywhere in the app.

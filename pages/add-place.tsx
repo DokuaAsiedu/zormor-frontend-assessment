@@ -1,5 +1,5 @@
 import { GeneralLayout } from "@/layouts/general-layout";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { usePlacesProvider } from "@/providers/db-provider";
 import { Error, OpenPeriod } from "@/components";
@@ -10,12 +10,14 @@ const formStructure = {
   description: "",
   location: "",
   openPeriods: [{ days: [], start: "", end: "" }],
+  images: []
 };
 
 export default function AddPlace() {
   const router = useRouter();
   const { places, updatePlaces } = usePlacesProvider();
   const [formData, setFormData] = useState<Place>(formStructure);
+  const [images, setImages] = useState<ArrayBuffer | string | null>([] as never)
   const [periods, setPeriods] = useState<Period[]>([
     { days: [], start: "", end: "" },
   ]);
@@ -32,6 +34,39 @@ export default function AddPlace() {
   const handleLocation = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData((prev) => ({ ...prev, location: e.target.value }));
   };
+
+  const handleImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault()
+    const files: FileList | null = e.target.files
+    // const image = await getFileFromInput
+    // const reader = new FileReader();
+
+    const imageArr: unknown[] = [];
+
+    if (files && files.length > 0) {
+      Array.from(files).forEach(item => {
+        const reader = new FileReader();
+        reader.readAsDataURL(item)
+
+        reader.onload = function() {
+          console.log(this.result)
+          imageArr.push(this.result)
+          // console.log(imageArr)
+          // setBase64
+          setImages(imageArr)
+        }
+      })
+    }
+    // console.log(imageArr)
+    
+    // reader.readAsArrayBuffer
+    // setImages(e.target.files);
+    // console.log(e.target.files)
+  }
+
+  useEffect(() => {
+    console.log(images)
+  },[images])
 
   const handleErrors = () => {
     let anyError = true
@@ -102,9 +137,11 @@ export default function AddPlace() {
 
     const fullForm: Place = Object.assign({}, formData, {
       openPeriods: periods,
+      images: images
     });
     // console.log(fullForm)
     fullForm.id = places.length + 1;
+    console.log(fullForm)
 
     updatePlaces([fullForm]);
     router.push("/");
@@ -166,7 +203,7 @@ export default function AddPlace() {
 
         <div className="sm:col-span-2 flex flex-col items-stretch gap-1">
           <label htmlFor="image">Images:</label>
-          <input id="image" type="file"/>
+          <input id="image" type="file" onChange={handleImage} multiple/>
         </div>
 
         <button

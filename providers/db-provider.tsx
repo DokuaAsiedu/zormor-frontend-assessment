@@ -16,6 +16,7 @@ export function PlacesProvider({ children }: Children) {
     request.onupgradeneeded = function() {
       db = this.result;
       console.log("running onupgradeneeded");
+      console.log(this)
       const placesStore = db.createObjectStore(
         STORE_NAME, 
         {keyPath: "id"}
@@ -26,21 +27,34 @@ export function PlacesProvider({ children }: Children) {
       placesStore.createIndex("description", "description", { unique: false });
       placesStore.createIndex("location", "location", { unique: false });
       placesStore.createIndex("openPeriods", "openPeriods", {unique: false,});
-      // console.log(placesStore)
+      placesStore.createIndex("images", "images", {unique: false,});
+      console.log(placesStore)
     };
 
     request.onsuccess = function() {
       db = this.result
 
+      // db.onabort = function(e) {
+      //   db.close();
+      //   db = null;
+      // }
+      // if (db.objectStoreNames.length == 0) { 
+      //   dbCallBack(true, true);
+      // } else {
+      //   dbCallBack(true, false);
+      // }
+
       const transaction = db.transaction(STORE_NAME, "readwrite")
 
       const store = transaction.objectStore(STORE_NAME)
+      // console.log(store)
 
       arr.forEach(item => {
-        store.add({id: item.id, name: item.name, location: item.location, description: item.description, openPeriods: item.openPeriods})
+        store.put({id: item.id, name: item.name, location: item.location, description: item.description, openPeriods: item.openPeriods, images: item.images})
       })
 
       const reqAllData = store.getAll()
+      console.log(reqAllData)
 
       reqAllData.onsuccess = function() {
         // console.log(db)
@@ -50,7 +64,12 @@ export function PlacesProvider({ children }: Children) {
       }
 
       reqAllData.onerror = function() {
+        console.log(this.error)
         console.log('Sorry something went wrong. Please try again later')
+      }
+
+      transaction.oncomplete = function() {
+        db.close()
       }
     }
 
