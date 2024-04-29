@@ -1,4 +1,4 @@
-import { LocationCard, Searchbar } from "@/components";
+import { LocationCard } from "@/components";
 import { GeneralLayout } from "@/layouts/general-layout";
 import { usePlacesProvider } from "@/providers/db-provider";
 import { useRouter } from "next/router";
@@ -11,7 +11,6 @@ export default function Home() {
   return (
     <GeneralLayout>
       <div className="container">
-        {/* <Searchbar /> */}
         <div className="flex flex-col items-stretch gap-4">
           {places.map((item, index) => (
             <LocationCard

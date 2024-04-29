@@ -54,10 +54,6 @@ export default function AddPlace() {
     }
 
 
-    if (places.find(item => item.name.toLowerCase() === formData.name.trim().toLowerCase())) {
-      setErrors(prev => ({...prev, name: "Name already exists"}))
-      anyError = false
-    }
     if (!formData.description.trim()) {
       setErrors(prev => ({...prev, description: "Please enter a valid description"}))
       anyError = false
@@ -104,17 +100,13 @@ export default function AddPlace() {
       return
     }
 
-    const placesCopy = [...places];
     const fullForm: Place = Object.assign({}, formData, {
       openPeriods: periods,
     });
     // console.log(fullForm)
     fullForm.id = places.length + 1;
 
-    placesCopy.push(fullForm);
-    updatePlaces(placesCopy);
-
-    localStorage.setItem("places", JSON.stringify(placesCopy));
+    updatePlaces([fullForm]);
     router.push("/");
   };
 
@@ -170,6 +162,11 @@ export default function AddPlace() {
             handlePeriods={setPeriods}
           />
           <Error message={errors.openPeriods}/>
+        </div>
+
+        <div className="sm:col-span-2 flex flex-col items-stretch gap-1">
+          <label htmlFor="image">Images:</label>
+          <input id="image" type="file"/>
         </div>
 
         <button

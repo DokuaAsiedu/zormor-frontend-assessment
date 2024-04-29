@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { GrAddCircle } from "react-icons/gr";
 import { DetailsPerPeriod } from "./details-per-period";
 
@@ -11,7 +11,6 @@ export function OpenPeriod({
   periods: Period[];
   handlePeriods: (prev: Period[]) => void;
 }) {
-  // const [periods, setPeriods] = useState<Period[]>([{days: [], start: "", end: ""}])
   const [pointer, setPointer] = useState<number>(0);
 
   const usedDays = useMemo(() => {
@@ -41,7 +40,6 @@ export function OpenPeriod({
     periodsCopy[pointer] = periodAtPointer;
 
     handlePeriods(periodsCopy);
-    // handleFormData((prev) => ({...prev, openPeriods: periodsCopy}))
   };
 
   const addPeriod = () => {
@@ -53,7 +51,6 @@ export function OpenPeriod({
 
     setPointer(pointer + 1);
     handlePeriods(periodsCopy);
-    // handleFormData((prev) => ({...prev, openPeriods: periodsCopy}))
   };
 
   const handleDelete = (id: number) => {
@@ -61,7 +58,6 @@ export function OpenPeriod({
 
     periodsCopy.splice(id, 1);
     handlePeriods(periodsCopy);
-    // handleFormData((prev) => ({...prev, openPeriods: periodsCopy}))
     setPointer(pointer - 1);
   };
 
@@ -70,7 +66,6 @@ export function OpenPeriod({
     periodsCopy[id].start = e.target.value;
 
     handlePeriods(periodsCopy);
-    // handleFormData((prev) => ({...prev, openPeriods: periodsCopy}))
   };
 
   const handleEnd = (e: React.ChangeEvent<HTMLInputElement>, id: number) => {
@@ -78,12 +73,7 @@ export function OpenPeriod({
     periodsCopy[id].end = e.target.value;
 
     handlePeriods(periodsCopy);
-    // handleFormData((prev) => ({...prev, openPeriods: periodsCopy}))
   };
-
-  useEffect(() => {
-    console.log(periods);
-  }, [periods]);
 
   return (
     <div>
